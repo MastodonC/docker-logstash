@@ -1,11 +1,7 @@
 FROM mastodonc/basejava
 
-# Download version 1.4.2 of logstash
-RUN curl -s https://download.elasticsearch.org/logstash/logstash/logstash-1.4.2.tar.gz | \
+RUN curl -sL https://download.elastic.co/logstash/logstash/logstash-all-plugins-2.1.0.tar.gz | \
     tar -xzf - -C / --transform 's@\([a-z-]*\)-[0-9\.]*@\1@'
-
-# Install contrib plugins
-RUN /logstash/bin/plugin install contrib
 
 ADD logstash.conf /logstash/logstash.conf
 ADD start-logstash.sh /start-logstash
